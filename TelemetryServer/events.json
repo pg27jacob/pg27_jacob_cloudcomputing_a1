@@ -1,0 +1,21 @@
+[
+  {
+    "keys": [
+      "buttonName",
+      "clickTime",
+      "housePositionValue",
+      "eventName",
+      "sessionId",
+      "deviceTime"
+    ],
+    "values": [
+      "Save",
+      "2025-04-11T03:16:27.4730822Z",
+      "System.Collections.Generic.List`1[System.String]",
+      "button_click'd",
+      "e2a7c307-9076-4ca2-9e8d-1c9089d5b869",
+      "2025-04-11T03:16:27.4730822Z"
+    ],
+    "timestamp": "2025-04-11T03:16:27.485Z"
+  }
+]
