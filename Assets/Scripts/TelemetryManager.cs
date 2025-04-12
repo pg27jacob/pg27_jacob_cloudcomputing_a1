@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -15,7 +14,7 @@ public class TelemetryManager : MonoBehaviour
 
     private bool isSending = false;
 
-    public ButtonClickLogger houseManager;
+   
 
     private void Awake()
     {
