@@ -1,35 +1,37 @@
 [
   {
     "keys": [
-      "durationSec",
-      "endTime",
-      "eventName",
-      "sessionId",
-      "deviceTime"
-    ],
-    "values": [
-      "16.54534",
-      "2025-04-12T04:07:46.9328866Z",
-      "session_end",
-      "c0200032-11a2-469e-9323-749c0df0d4c5",
-      "2025-04-12T04:07:46.9328866Z"
-    ],
-    "timestamp": "2025-04-12T04:07:46.934Z"
-  },
-  {
-    "keys": [
       "startTime",
       "eventName",
       "sessionId",
       "deviceTime"
     ],
     "values": [
-      "2025-04-12T04:09:47.2728281Z",
+      "2025-04-17T00:39:40.8823311Z",
       "session_start",
-      "09e7b3dd-aeb9-4812-b5ff-30b46b8dabac",
-      "2025-04-12T04:09:47.2775954Z"
+      "c4246ca3-16f5-4496-9570-e66604ea31bc",
+      "2025-04-17T00:39:40.8873327Z"
     ],
-    "timestamp": "2025-04-12T04:09:47.303Z"
+    "timestamp": "2025-04-17T00:39:40.897Z"
+  },
+  {
+    "keys": [
+      "buttonName",
+      "clickTime",
+      "housePositionValue",
+      "eventName",
+      "sessionId",
+      "deviceTime"
+    ],
+    "values": [
+      "Save",
+      "2025-04-17T00:39:43.3469647Z",
+      "System.Collections.Generic.List`1[System.String]",
+      "button_click'd",
+      "1d4cd824-f615-47ac-bbd0-c4619b130755",
+      "2025-04-17T00:39:43.3469647Z"
+    ],
+    "timestamp": "2025-04-17T00:39:43.350Z"
   },
   {
     "keys": [
@@ -40,12 +42,12 @@
       "deviceTime"
     ],
     "values": [
-      "37.96586",
-      "2025-04-12T04:10:26.4517524Z",
+      "5.986226",
+      "2025-04-17T00:40:41.7243657Z",
       "session_end",
-      "3f6bd0a3-8181-45ee-b934-c00fe4793383",
-      "2025-04-12T04:10:26.4517524Z"
+      "834ca6c9-6c9b-4cf7-9d49-2db94e0baf90",
+      "2025-04-17T00:40:41.7243657Z"
     ],
-    "timestamp": "2025-04-12T04:10:26.465Z"
+    "timestamp": "2025-04-17T00:40:41.737Z"
   }
 ]
