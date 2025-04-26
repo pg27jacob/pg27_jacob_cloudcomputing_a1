@@ -24,3 +24,9 @@ OPEN TELEMETYSERVER, THIS IS WHERE THE SAVES IN CLOUDSAVES.JSON
 'V' TO LOAD FROM CLOUD
 
 PRESS THE 'SAVE' BUTTON IN GAME TO SAVE TELEMETYDATA WHICH SAVES TO EVENTS.JSON
+
+
+ADDED THE TOKEN GENERATION LOGIC USING THE NPM SERVER.
+Update "server.js" for tokens
+Added "LoginManager.cs" to run the login code, just to keep it seperated and easier for
+me to read through.
