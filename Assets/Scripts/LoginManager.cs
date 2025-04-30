@@ -33,14 +33,14 @@ public class LoginManager : MonoBehaviour
         }
     }
 
-    public void Login(string username, string password, Action<bool> onLoginComplete = null) // Optional callback
+    public void Login(string username, string password, Action<bool> onLoginComplete = null) 
     {
         StartCoroutine(SendLoginRequest(username, password, onLoginComplete));
     }
 
     IEnumerator SendLoginRequest(string username, string password, Action<bool> onLoginComplete)
     {
-        LoginCredentials credentials = new LoginCredentials { username = username, password = password };
+        LoginCredentials credentials = new LoginCredentials { username = username, password = password, token = AuthToken };
         string jsonPayload = JsonUtility.ToJson(credentials);
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonPayload);
 
@@ -88,6 +88,7 @@ public class LoginManager : MonoBehaviour
     {
         public string username;
         public string password;
+        public string token;
     }
 
     [System.Serializable]
@@ -98,6 +99,14 @@ public class LoginManager : MonoBehaviour
 
     public void Logout()
     {
+        AuthToken = "";
+        IsLoggedIn = false;
+        PlayerPrefs.DeleteKey("AuthToken");
+    }
+
+    private void OnApplicationQuit()
+    {
+        Debug.Log("Application is quitting, clearing AuthToken from PlayerPrefs.");
         AuthToken = "";
         IsLoggedIn = false;
         PlayerPrefs.DeleteKey("AuthToken");

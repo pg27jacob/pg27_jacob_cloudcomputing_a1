@@ -21,10 +21,34 @@ const users = {
 // Secret key (Store this securely! Upadate to work properly later)
 const SECRET_KEY = 'YourReallySecureKeyHere';
 
+// Function to verify JWT token
+const verifyToken = (token) => {
+    try {
+        const decoded = jwt.verify(token, SECRET_KEY);
+        return decoded;
+    } catch (error) {
+        return null;
+    }
+};
+
 // 1. Authentication Route (/login)
 app.post('/login', (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, token } = req.body; // Expecting an optional 'token' in the body
 
+    // If a token is provided, try to verify it
+    if (token) {
+        const decodedToken = verifyToken(token);
+        if (decodedToken && decodedToken.username) {
+            // Token is valid, consider this user logged in
+            console.log(`Login with existing token successful for user: ${decodedToken.username}`);
+            return res.json({ token }); // Send the same token back
+        } else {
+            // Token is invalid or expired, proceed with standard authentication
+            console.log('Provided token is invalid or expired, proceeding with password check.');
+        }
+    }
+
+    // If no token or the provided token is invalid, proceed with username/password check
     if (!username || !password) {
         return res.status(400).json({ error: 'Username and password are required' });
     }
@@ -39,10 +63,11 @@ app.post('/login', (req, res) => {
         };
 
         // Generate the JWT
-        const token = jwt.sign(payload, SECRET_KEY);
+        const newToken = jwt.sign(payload, SECRET_KEY);
+        console.log("Login Success");
 
-        // Send the token back to the client
-        res.json({ token });
+        // Send the new token back to the client
+        res.json({ token: newToken });
     } else {
         // Authentication failed
         res.status(401).json({ error: 'Invalid credentials' });
