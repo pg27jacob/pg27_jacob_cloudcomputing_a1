@@ -5,6 +5,13 @@ RUN
 NPM START
 TO START THE SERVER
 
+SIGN IN BUTTON WORKS, FOR TOKEN GENERATION.
+PUT "player1" in username and "password1" into passwords
+THE TOKEN INFO WILL BE PRINTED INTO THE CONSOLE AND SAVED FOR AN HOUR
+
+I didnt actually have the work we did for login when we did it soo
+be gentle <3
+
 SAVE BUTTON SAVES LOCALLY AS WELL AS SENDS TELEMETRY DATA
 
 in Assets/SaveData
