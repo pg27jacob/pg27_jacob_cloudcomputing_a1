@@ -33,7 +33,7 @@ const verifyToken = (token) => {
 
 // 1. Authentication Route (/login)
 app.post('/login', (req, res) => {
-    const { username, password, token } = req.body; // Expecting an optional 'token' in the body
+    const { username, password, token } = req.body;
 
     // If a token is provided, try to verify it
     if (token) {
@@ -59,6 +59,7 @@ app.post('/login', (req, res) => {
         const payload = {
             userId: user.id,
             username: username,
+           
             exp: Math.floor(Date.now() / 1000) + (60 * 60), // Token expires in 1 hour (in seconds)
         };
 
