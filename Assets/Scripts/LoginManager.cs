@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
 using System;
+using System.Text;
 
 public class LoginManager : MonoBehaviour
 {
@@ -37,20 +38,25 @@ public class LoginManager : MonoBehaviour
         StartCoroutine(SendLoginRequest(username, password, onLoginComplete));
     }
 
-    IEnumerator SendLoginRequest(string username, string password, Action<bool> onLoginComplete) // Optional callback
+    IEnumerator SendLoginRequest(string username, string password, Action<bool> onLoginComplete)
     {
-        WWWForm form = new WWWForm();
-        form.AddField("username", username);
-        form.AddField("password", password);
+        LoginCredentials credentials = new LoginCredentials { username = username, password = password };
+        string jsonPayload = JsonUtility.ToJson(credentials);
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonPayload);
 
-        using (UnityWebRequest www = UnityWebRequest.Post(loginUrl, form))
+        using (UnityWebRequest www = new UnityWebRequest(loginUrl, "POST"))
         {
+            UploadHandlerRaw uploadHandler = new UploadHandlerRaw(bodyRaw);
+            uploadHandler.contentType = "application/json";
+            www.uploadHandler = uploadHandler;
+            www.downloadHandler = new DownloadHandlerBuffer();
+
             yield return www.SendWebRequest();
 
             if (www.result != UnityWebRequest.Result.Success)
             {
                 Debug.LogError("Login failed: " + www.error);
-                OnLogin?.Invoke(false); // Notify about the login
+                OnLogin?.Invoke(false);
                 onLoginComplete?.Invoke(false);
             }
             else
@@ -62,19 +68,32 @@ public class LoginManager : MonoBehaviour
                     AuthToken = response.token;
                     IsLoggedIn = true;
                     Debug.Log("Received Token: " + AuthToken);
-                    // Store authToken securely (PlayerPrefs is NOT ideal for sensitive data, but fine for this example)
                     PlayerPrefs.SetString("AuthToken", AuthToken);
-                    OnLogin?.Invoke(true); //changed
+                    OnLogin?.Invoke(true);
                     onLoginComplete?.Invoke(true);
                 }
                 catch (Exception e)
                 {
                     Debug.LogError("Error parsing login response: " + e.Message);
-                    OnLogin?.Invoke(false); // Notify about the login failure
+                    OnLogin?.Invoke(false);
                     onLoginComplete?.Invoke(false);
                 }
             }
         }
+    }
+
+    // Helper class to structure the login credentials as JSON
+    [System.Serializable]
+    private class LoginCredentials
+    {
+        public string username;
+        public string password;
+    }
+
+    [System.Serializable]
+    public class LoginResponse
+    {
+        public string token;
     }
 
     public void Logout()
@@ -84,9 +103,4 @@ public class LoginManager : MonoBehaviour
         PlayerPrefs.DeleteKey("AuthToken");
     }
 
-    [System.Serializable]
-    public class LoginResponse
-    {
-        public string token;
-    }
 }
