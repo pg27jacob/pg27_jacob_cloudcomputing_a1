@@ -60,7 +60,7 @@ app.post('/login', (req, res) => {
             userId: user.id,
             username: username,
            
-            exp: Math.floor(Date.now() / 1000) + (60 * 60), // Token expires in 1 hour (in seconds)
+            exp: Math.floor(Date.now() / 1000) + (0.1 * 60), // Token expires in 6 seconds
         };
 
         // Generate the JWT
